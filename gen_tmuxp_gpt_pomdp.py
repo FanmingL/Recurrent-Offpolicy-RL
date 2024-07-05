@@ -43,7 +43,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     num_ensemble = 8
     basic_activation = 'elu'
     embedding_output_activation = f'linear'
-    rnn_type_name = 'cgpt_h12_l4_p0.0_ml1024' #d_conv: 0, d_state: 64
+    rnn_type_name = 'cgpt_h8_l4_p0.0_ml1024' #d_conv: 0, d_state: 64
     common_ndim = 256
     gpt_dim = 8 * 64
     parameters_base = dict(
