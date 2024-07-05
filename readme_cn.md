@@ -54,7 +54,7 @@ tensorboard --logdir=./logfile
 ```
 你也可以使用smart_logger中的渲染界面来查看实验数据
 ```bash
-python -m smart_logger.htmlpage -p 4008 -wks /path/to/logfile -t local_plotting -u user -pw resel -cp 600
+python -m smart_logger.htmlpage -p 4008 -d /path/to/logfile -wks ~/Desktop/smartlogger_wks  -t local_plotting -u user -pw resel -cp 600
 ```
 你可以访问
 [http://localhost:4008](http://localhost:4008)来查看训练数据，登录用户名user, 密码resel。

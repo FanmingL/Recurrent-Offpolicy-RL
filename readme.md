@@ -55,7 +55,7 @@ tensorboard --logdir=./logfile
 ```
 You can also use the rendering interface in SmartLogger to view experimental data:
 ```bash
-python -m smart_logger.htmlpage -p 4008 -wks /path/to/logfile -t local_plotting -u user -pw resel -cp 600
+python -m smart_logger.htmlpage -p 4008 -d /path/to/logfile -wks ~/Desktop/smartlogger_wks  -t local_plotting -u user -pw resel -cp 600
 ```
 Visit [http://localhost:4008](http://localhost:4008) to view the training data, with the username `user` and password `resel`.
 
