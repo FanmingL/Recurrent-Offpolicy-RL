@@ -1,0 +1,25 @@
+BACKUP_IGNORE_HEAD:
+- __p
+- .
+BACKUP_IGNORE_KEY:
+- logfile
+- logfile_bk
+BACKUP_IGNORE_TAIL:
+- stl
+- dae
+- STL
+- urdf
+- pkl
+- pdf
+BASE_PATH: null
+LOG_DIR_BACKING_NAME: OffpolicyRNN0302
+LOG_FOLDER_NAME: logfile
+LOG_FOLDER_NAME_BK: logfile_bk
+MAIN_MACHINE_IP:
+- 127.0.0.1
+MAIN_MACHINE_LOG_PATH: /path/to/remote/OffpolicyRNN0302
+MAIN_MACHINE_PASSWD: passwd
+MAIN_MACHINE_PORT:
+- 22
+MAIN_MACHINE_USER: username
+WORKSPACE_PATH: /path/to/remote/OffpolicyRNN0302

@@ -1,0 +1,10 @@
+.idea
+build
+dist
+*.egg-info
+__pycache__
+logfile
+logfile_bk
+.pytest_cache
+.DS_Store
+run_all.json

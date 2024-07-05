@@ -1,0 +1,42 @@
+Box2D==2.3.10
+causal_conv1d @ git+https://github.com/Dao-AILab/causal-conv1d.git#egg=causal_conv1d
+cocos==0.2.2
+dm_control==1.0.16
+dmc2gym @ git+https://github.com/denisyarats/dmc2gym.git#egg=dmc2gym
+einops==0.8.0
+flash_attn @ git+https://github.com/Dao-AILab/flash-attention.git#egg=flash_attn
+gin==0.1.006
+gym==0.21.0
+jax==0.4.30
+matplotlib==3.7.4
+meshcat==0.3.2
+ml_collections==0.1.1
+mujoco_py==2.1.2.14
+numpy==1.24.0
+omg==1.1.3
+packaging==24.1
+pandas==2.0.3
+psutil==5.9.7
+pybullet==3.2.5
+pycolab==1.2
+pygame==2.5.2
+pyglet==2.0.15
+pytest==7.4.4
+python_dateutil==2.8.2
+PyYAML==6.0.1
+PyYAML==6.0.1
+roboschool==1.0.34
+scikit_learn==1.5.1
+scipy==1.14.0
+seaborn==0.13.2
+setuptools==66.0.0
+six==1.16.0
+smart_logger @ git+https://github.com/FanmingL/SmartLogger#egg=smart_logger
+tensorboardX==2.6.2.2
+tensorboardX==2.6.2.2
+tensorflow_cpu==2.13.1
+torch==2.1.2+cu121.with.pypi.cudnn
+tqdm==4.66.1
+transformers==4.39.3
+transforms3d==0.4.2
+mamba_ssm @ git+https://github.com/state-spaces/mamba#egg=mamba_ssm
