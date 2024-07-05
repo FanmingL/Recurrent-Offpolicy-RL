@@ -40,6 +40,8 @@ docker run --rm -it -v $PWD:/workspace --gpus all core.116.172.93.164.nip.io:306
 ## 启动训练
 我们用以`gen_tmuxp`开头的python文件来记录训练的超参数，如对于`cgpt`结构的策略，我们可以如下启动实验
 ```bash
+cd /path/to/Recurrent-Offpolicy-RL
+pip install -e .
 python gen_tmuxp_gpt.py
 tmuxp load run_all.json
 ```

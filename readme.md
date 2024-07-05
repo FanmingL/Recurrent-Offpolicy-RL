@@ -43,6 +43,8 @@ docker run --rm -it -v $PWD:/workspace --gpus all core.116.172.93.164.nip.io:306
 ## Starting Training
 We use Python files starting with `gen_tmuxp` to record the training hyperparameters. For instance, to start an experiment with the `cgpt` structure, you can run:
 ```bash
+cd /path/to/Recurrent-Offpolicy-RL
+pip install -e .
 python gen_tmuxp_gpt.py
 tmuxp load run_all.json
 ```
