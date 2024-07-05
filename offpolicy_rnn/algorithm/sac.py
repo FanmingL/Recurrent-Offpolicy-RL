@@ -289,14 +289,14 @@ class SAC:
                                                         mp_context=self.process_context)
             try:
                 test_futures = [self.process_pool.submit(eval_inprocess, self.policy_args, state_dict, self.env_name, random.randint(0, 10000000),
-                                                         self.env_info['seed'], self.parameter.test_nrollout, future_idx, os.getpid(), self.parameter.base_algorithm, 'cuda:0' if self.parameter.test_nprocess == 1 else 'cpu') for future_idx in range(self.parameter.test_nprocess)]
+                                                         self.env_info['seed'], self.parameter.test_nrollout, future_idx, os.getpid(), self.parameter.base_algorithm, self.device if self.parameter.test_nprocess == 1 else torch.device('cpu')) for future_idx in range(self.parameter.test_nprocess)]
             except concurrent.futures.process.BrokenProcessPool:
                 self.process_pool = ProcessPoolExecutor(max_workers=self.parameter.test_nprocess,
                                                         mp_context=self.process_context)
                 test_futures = [self.process_pool.submit(eval_inprocess, self.policy_args, state_dict, self.env_name,
                                                          random.randint(0, 10000000),
                                                          self.env_info['seed'], self.parameter.test_nrollout,
-                                                         future_idx, os.getpid(), self.parameter.base_algorithm, 'cuda:0' if self.parameter.test_nprocess == 1 else 'cpu') for future_idx in
+                                                         future_idx, os.getpid(), self.parameter.base_algorithm, self.device if self.parameter.test_nprocess == 1 else torch.device('cpu')) for future_idx in
                                 range(self.parameter.test_nprocess)]
             # test_result = {}
             # for _ in range(3):
