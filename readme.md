@@ -3,15 +3,15 @@
 This repository is the official implementation of the paper "[Efficient Recurrent Off-Policy RL Requires a Context-Encoder-Specific Learning Rate.](https://arxiv.org/abs/2405.15384)" It includes implementations of SAC and TD3 based on RNN and Transformer architectures.
 ## Features
 The algorithms implemented in this repository have the following features:
-1. We train using full-length trajectories instead of sequence fragments;
+1. We train the recurrent policy and values using full-length trajectories instead of sequence fragments;
 2. To enhance training stability with full-length trajectories, we utilize the [Context-Encoder-Specific Learning Rate](https://arxiv.org/abs/2405.15384) (RESeL) technique;
 3. [TODO] We provide a set of training hyperparameters that can achieve state-of-the-art performance in different environments of POMDP and MDP.
 
-## Supported Network Architectures
-This repository supports the following neural network architectures, tested with training on `gru`, `mamba`, `smamba`, and `cgpt` layer types. The training speed from fastest to slowest is: `smamba`, `mamba`, `cgpt`, `gru`.
+## Supported Layer Types
+This repository supports the following neural network architectures. We have tested with training on `gru`, `mamba`, `smamba`, and `cgpt` layer types. The training speed from fastest to slowest is: `smamba`, `mamba`, `cgpt`, `gru`.
 
-| Layer Name  | layer_type | Parameters                                                | Notes                                                                                                                                                                                                                                                                |
-| ----------- | ---------- | --------------------------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Layer       | layer_type | Parameters                                                | Notes                                                                                                                                                                                                                                                                |
+|-------------| ---------- | --------------------------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GRU         | gru        |                                                           | PyTorch's built-in GRU, non-parallel, but still achieves good policy performance                                                                                                                                                                                     |
 | Mamba       | smamba     | state_dim, conv1d_size, block_num, norm_type              | Official Mamba implementation, accelerated with selective_scan parallelization. Example: `smamba_s32_c16_b2_nln` means `state_dim=32`, `conv1d_size=16`, `block_num=2`, `norm_type=layer_norm`                                                                       |
 | Mamba       | mamba      | state_dim, conv1d_size                                    | Mamba implemented with Triton, serial computation, significantly faster than the PyTorch implementation. Example: `mamba_s32_c16` means `state_dim=32`, `conv1d_size=16`                                                                                             |
@@ -22,7 +22,7 @@ This repository supports the following neural network architectures, tested with
 
 ## Dependencies
 ### Hardware
-In the aforementioned network structure, GRU can be trained directly on a CPU machine. Mamba, GIRL, and LRU are implemented based on Triton, requiring training on GPU machines, while CGPT and GPT utilize flash_attention for acceleration, necessitating the use of Ampere, Ada, or Hopper GPUs (e.g., A100, RTX 3090, RTX 4090, H100).
+In the aforementioned network structures, GRU can be trained directly on a CPU machine. Mamba, GIRL, and LRU are implemented based on Triton, requiring training on GPU machines, while cgpt and gpt utilize flash_attention for acceleration, requiring the use of Ampere, Ada, or Hopper GPUs (e.g., A100, RTX 3090, RTX 4090, H100).
 
 ### Environment
 Since we have modified the CUDA source code of Mamba, it needs to be recompiled. This library also depends on some earlier RL training environments, so we strongly recommend using the Docker image we have prepared to run our algorithms. To pull the Docker image, use the following command:
@@ -49,7 +49,7 @@ tmuxp load run_all.json
 ```
 
 ## Visualizing Results
-We use [SmartLogger](https://github.com/FanmingL/SmartLogger) for log management. You can find the training logs in the logfile. The most straightforward way to view the training process is to use TensorBoard:
+We use [SmartLogger](https://github.com/FanmingL/SmartLogger) for log management. You can find the training logs in the directory named `logfile`. The most straightforward way to view the training process is to use TensorBoard:
 ```bash
 tensorboard --logdir=./logfile
 ```
@@ -60,7 +60,7 @@ python -m smart_logger.htmlpage -p 4008 -d /path/to/logfile -wks ~/Desktop/smart
 Visit [http://localhost:4008](http://localhost:4008) to view the training data, with the username `user` and password `resel`.
 
 ## Results
-The [paper](https://arxiv.org/pdf/2405.15384) on RESeL provides extensive algorithm comparisons. The performance comparison on POMDP tasks is as follows, with GPIDE-ESS being the previous SOTA algorithm.
+The [paper](https://arxiv.org/pdf/2405.15384) of RESeL provides extensive algorithm comparisons. The performance comparison on POMDP tasks is as follows, with GPIDE-ESS being the previous SOTA algorithm.
 
 |                     |              RESeL (ours)               |    PPO-GRU    |    MF-RNN     | SAC-Transformer |   SAC-MLP    |   TD3-MLP    |                GPIDE-ESS                |      VRM       |    A2C-GRU    |
 | :------------------ | :-------------------------------------: | :-----------: | :-----------: | :-------------: | :----------: | :----------: | :-------------------------------------: | :------------: | :-----------: |
@@ -84,7 +84,7 @@ The performances in classic MuJoCo tasks are as follows
 | Walker2d-v2    | $\mathbf{8004} \pm\mathbf{150} ^\star$  |
 
 
-We recently attempted to combine RESeL with Transformer. Some of the experimental results are as follows:
+We recently worked on combining RESeL with Transformer. Some of the experimental results are as follows:
 
 |                     | RESeL-Transformer |
 | :------------------ |:-----------------:|
