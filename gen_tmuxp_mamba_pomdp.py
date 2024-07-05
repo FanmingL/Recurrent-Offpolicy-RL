@@ -100,6 +100,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     )
 
     def task_is_valid(_task):
+        _task['rnn_value_lr'] = _task['rnn_policy_lr']
         if _task['env_name'] == 'AntBLT-V-v0':
             _task['sac_batch_size'] = 999
         return True

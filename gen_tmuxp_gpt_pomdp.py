@@ -101,6 +101,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     )
 
     def task_is_valid(_task):
+        _task['rnn_value_lr'] = _task['rnn_policy_lr']
         return True
 
     # 从这里开始不用再修改了
