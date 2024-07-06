@@ -40,11 +40,11 @@ docker run --rm -it -v $PWD:/home/ubuntu/workspace --gpus all core.116.172.93.16
 ```
 
 ## Starting Training
-We use Python files starting with `gen_tmuxp` to record the training hyperparameters. For instance, to start an experiment with the `cgpt` structure, you can run:
+We use Python files starting with `gen_tmuxp` to record the training hyperparameters. For instance, to start an experiment with the `smamba` structure, you can run:
 ```bash
 cd /path/to/Recurrent-Offpolicy-RL
 pip install -e .
-python gen_tmuxp_gpt.py
+python gen_tmuxp_mamba_mujoco.py
 tmuxp load run_all.json
 ```
 
