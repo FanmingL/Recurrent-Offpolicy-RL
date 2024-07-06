@@ -53,21 +53,21 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         test_nrollout=1,
 
         value_embedding_layer_type=[f'fc', f'{rnn_type_name}', f'fc'],
-        value_embedding_activations=[f'{basic_activation}', f'linear', embedding_output_activation],
+        value_embedding_activations=[f'{basic_activation}', f'{basic_activation}', embedding_output_activation],
         value_embedding_hidden_size=[common_ndim, common_ndim],
 
-        value_hidden_size=[common_ndim, common_ndim, common_ndim],
-        value_activations=[basic_activation, basic_activation, basic_activation, 'linear'],
-        value_layer_type=[f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}'],
+        value_hidden_size=[common_ndim, common_ndim],
+        value_activations=[basic_activation, basic_activation, 'linear'],
+        value_layer_type=[f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}'],
 
         policy_embedding_layer_type=[ f'fc', f'{rnn_type_name}', 'fc'],
-        policy_embedding_activations=[f'{basic_activation}', 'linear',
+        policy_embedding_activations=[f'{basic_activation}', f'{basic_activation}',
                                       embedding_output_activation],
         policy_embedding_hidden_size=[common_ndim, common_ndim],
 
-        policy_hidden_size=[common_ndim, common_ndim, common_ndim],
-        policy_activations=[basic_activation, basic_activation, basic_activation, 'linear'],
-        policy_layer_type=[f'fc', 'fc', f'fc', f'fc'],
+        policy_hidden_size=[common_ndim, common_ndim],
+        policy_activations=[basic_activation, basic_activation, 'linear'],
+        policy_layer_type=[f'fc', f'fc', f'fc'],
         sac_tau=0.995,  # influence value loss divergence
         value_net_num=1,
         cuda_inference=True,
@@ -89,7 +89,6 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         seed=[1],
         env_name=[
             'AntBLT-V-v0', 'HalfCheetahBLT-V-v0', 'HopperBLT-V-v0', 'WalkerBLT-V-v0',
-            'AntBLT-P-v0', 'HalfCheetahBLT-P-v0', 'HopperBLT-P-v0', 'WalkerBLT-P-v0',
             ]
     )
     # finally number of tasks: len(exclusive_candidates['seed']) * len(['env_name']) * ....
@@ -99,13 +98,14 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         policy_lr=[3e-4],
         value_lr=[1e-3],
         rnn_policy_lr=[1e-5],
-        information=['Mamba_0705'],
+        information=['Mamba_0706'],
     )
 
     def task_is_valid(_task):
         _task['rnn_value_lr'] = _task['rnn_policy_lr']
         if _task['env_name'] == 'AntBLT-V-v0':
-            _task['sac_batch_size'] = 999
+            _task['sac_batch_size'] = 128
+            _task['value_lr'] = _task['policy_lr'] = 5e-4
         return True
 
     # 从这里开始不用再修改了
