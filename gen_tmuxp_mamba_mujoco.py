@@ -7,7 +7,7 @@ from smart_logger.scripts.generate_tmuxp_base import generate_tmuxp_file, make_c
 import argparse
 import subprocess
 from typing import Dict
-MAX_SUBWINDOW =2
+MAX_SUBWINDOW = 2
 # [MAX_PARALLEL]: The maximum number of experiments that can run in parallel. If you need to run 3 seeds in 5 environments, you will
 # need to set up a total of 3x5=15 experiments. If you set `MAX_PARALLEL` to 4, it will start 4 task queues,
 # each executing a roughly equal number of tasks sequentially. In this case, the four queues will execute tasks
@@ -94,6 +94,9 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         env_name=[
             'Walker2d-v2',
             'Hopper-v2',
+            # 'Humanoid-v2',
+            # 'HalfCheetah-v2',
+            # 'Ant-v2',
                     ]
     )
     # finally number of tasks: len(exclusive_candidates['seed']) * len(['env_name']) * ....
@@ -110,6 +113,11 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         _task['rnn_value_lr'] = _task['rnn_policy_lr']
         if _task['env_name'] == 'Hopper-v2':
             _task['target_entropy_ratio'] = 0.0
+        if _task['env_name'] == 'HalfCheetah-v2':
+            _task['policy_lr'] *= 5
+            _task['value_lr'] *= 5
+            _task['rnn_policy_lr'] *= 5
+            _task['rnn_value_lr'] *= 5
         return True
 
     # 从这里开始不用再修改了

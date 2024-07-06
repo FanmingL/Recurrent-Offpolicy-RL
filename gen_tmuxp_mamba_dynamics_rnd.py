@@ -47,7 +47,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     common_ndim = 256
     parameters_base = dict(
         alg_name='sac_rnn_full_horizon_redQ_sep_optim',
-        total_iteration=1500,
+        total_iteration=2000,
         target_entropy_ratio=1.0,
         test_nprocess=5,
         test_nrollout=1,
@@ -80,7 +80,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         value_uni_model_input_mapping_dim=128,
         policy_update_per=2,
         reward_input=False,
-        sac_batch_size=1999,
+        sac_batch_size=999,
         state_action_encoder=True,
         last_state_input=True,
     )
@@ -88,29 +88,22 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     exclusive_candidates = dict(
         seed=[1],
         env_name=[
-            'AntBLT-V-v0', 'HalfCheetahBLT-V-v0', 'HopperBLT-V-v0', 'WalkerBLT-V-v0',
-            'AntBLT-P-v0', 'HalfCheetahBLT-P-v0', 'HopperBLT-P-v0', 'WalkerBLT-P-v0',
+            'DM_Ant_gravity-v2', 'DM_HalfCheetah_gravity-v2', 'DM_Walker2d_gravity-v2', 'DM_Humanoid_gravity-v2',
+            'DM_Hopper_gravity-v2'
             ]
     )
     # finally number of tasks: len(exclusive_candidates['seed']) * len(['env_name']) * ....
 
     # 6. 单独设置
     aligned_candidates = dict(
-        policy_lr=[3e-4],
-        value_lr=[1e-3],
-        rnn_policy_lr=[1e-5],
-        information=['Mamba_0706'],
+        policy_lr=[6e-5],
+        value_lr=[2e-4],
+        rnn_policy_lr=[2e-6],
+        information=['Mamba_0706_gravity'],
     )
 
     def task_is_valid(_task):
         _task['rnn_value_lr'] = _task['rnn_policy_lr']
-        if _task['env_name'] == 'AntBLT-V-v0':
-            _task['sac_batch_size'] = 128
-            _task['value_lr'] = _task['policy_lr'] = 5e-4
-        if _task['env_name'] == 'WalkerBLT-P-v0':
-            _task['rnn_value_lr'] /= 2
-            _task['rnn_policy_lr'] /= 2
-
         return True
 
     # 从这里开始不用再修改了

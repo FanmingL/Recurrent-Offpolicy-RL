@@ -310,11 +310,7 @@ class SACFullLengthRNNEnsembleQ(SAC):
             total_valid_indicators = traj_valid_indicators.clone()
             total_valid_indicators[torch.where(torch.diff(traj_valid_indicators, dim=-2) == 1)] = 1
             total_rnn_start[torch.where(torch.diff(total_rnn_start, dim=-2) == -1)] = 0
-            # TODO: check to remove done when maximum timestep reaches, this is a very important setting
-            if self.parameter.env_name.startswith('Mem'):
-                pass
-            else:
-                done[timeout > 0] = 0
+            done[timeout > 0] = 0
             # valid_num = mask.sum().item()
             alpha_detach = self.log_sac_alpha.exp().detach()
             # set RNN termination for LRU

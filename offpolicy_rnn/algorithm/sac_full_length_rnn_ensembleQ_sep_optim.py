@@ -28,16 +28,29 @@ def prepare_param_list(model, rnn_lr, l2_norm):
         def mlp_parameter(mod):
             return _insert_mlp_parameter(mod, rnn_lr, l2_norm, type(v).__name__)
 
+        # This is paper implementation.
         if k.endswith('encoder'):
-            param_list.append(rnn_parameter(v))
+            param_list.append(mlp_parameter(v))
         elif k == 'embedding_model':
             param_list.append(rnn_parameter(v.layer_list[0]))
             for i in range(1, len(model.embedding_network.layer_list) - 1):
                 param_list.append(rnn_parameter(v.layer_list[i]))
-            param_list.append(mlp_parameter(v.layer_list[-1]))
+            param_list.append(rnn_parameter(v.layer_list[-1]))
             param_list.append(rnn_parameter(v.activation_list))
         else:
             param_list.append(mlp_parameter(v))
+
+        # OR setting layers before RNN to a small learning rate
+        # if k.endswith('encoder'):
+        #     param_list.append(rnn_parameter(v))
+        # elif k == 'embedding_model':
+        #     param_list.append(rnn_parameter(v.layer_list[0]))
+        #     for i in range(1, len(model.embedding_network.layer_list) - 1):
+        #         param_list.append(rnn_parameter(v.layer_list[i]))
+        #     param_list.append(mlp_parameter(v.layer_list[-1]))
+        #     param_list.append(rnn_parameter(v.activation_list))
+        # else:
+        #     param_list.append(mlp_parameter(v))
     return param_list
 
 class SACFullLengthRNNENSEMBLEQ_SEP_OPTIM(SACFullLengthRNNEnsembleQ):
