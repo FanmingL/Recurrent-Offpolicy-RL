@@ -7,8 +7,14 @@ from smart_logger.scripts.generate_tmuxp_base import generate_tmuxp_file, make_c
 import argparse
 import subprocess
 from typing import Dict
+
+# [MAX_SUBWINDOW] Max number of panes in every tmux window.
 MAX_SUBWINDOW =2
-MAX_PARALLEL = 12
+# [MAX_PARALLEL]: The maximum number of experiments that can run in parallel. If you need to run 3 seeds in 5 environments, you will
+# need to set up a total of 3x5=15 experiments. If you set `MAX_PARALLEL` to 4, it will start 4 task queues,
+# each executing a roughly equal number of tasks sequentially. In this case, the four queues will execute tasks
+# in the following quantities: [4, 4, 4, 3].
+MAX_PARALLEL = 4
 
 def get_gpu_count():
     sp = subprocess.Popen(['nvidia-smi', '-L'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -26,7 +32,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     # 0. 代码运行路径
     current_path = os.path.dirname(os.path.abspath(__file__))
     # 1. GPU设置
-    RUN_MAC = False
+    # VALID GPUS, if no GPU is available, GPUS = [""]
     GPUS = [_ for _ in range(get_gpu_count())]
     # 2. 环境变量设置
     environment_dict = dict(
@@ -92,6 +98,8 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         ],
 
     )
+    # finally number of tasks: len(exclusive_candidates['seed']) * len(['env_name']) * ....
+
     # 6. 单独设置
     aligned_candidates = dict(
         policy_lr=[3e-4],
@@ -101,6 +109,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     )
 
     def task_is_valid(_task):
+        # change config in-place
         _task['rnn_value_lr'] = _task['rnn_policy_lr']
         return True
 

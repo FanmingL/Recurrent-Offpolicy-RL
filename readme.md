@@ -36,7 +36,7 @@ docker load -i 20240607_flash_attn_image.tar.gz
 ```
 To start the Docker container:
 ```bash
-docker run --rm -it -v $PWD:/workspace --gpus all core.116.172.93.164.nip.io:30670/public/luofanming:20240607150538 /bin/bash
+docker run --rm -it -v $PWD:/home/ubuntu/workspace --gpus all core.116.172.93.164.nip.io:30670/public/luofanming:20240607150538 /bin/bash
 ```
 
 ## Starting Training

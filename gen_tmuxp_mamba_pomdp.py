@@ -26,6 +26,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     # 0. 代码运行路径
     current_path = os.path.dirname(os.path.abspath(__file__))
     # 1. GPU设置
+    # VALID GPUS, if no GPU is available, GPUS = [""]
     GPUS = [_ for _ in range(get_gpu_count())]
     # 2. 环境变量设置
     environment_dict = dict(
@@ -91,6 +92,8 @@ def get_cmd_array(total_machine=8, machine_idx=0):
             'AntBLT-P-v0', 'HalfCheetahBLT-P-v0', 'HopperBLT-P-v0', 'WalkerBLT-P-v0',
             ]
     )
+    # finally number of tasks: len(exclusive_candidates['seed']) * len(['env_name']) * ....
+
     # 6. 单独设置
     aligned_candidates = dict(
         policy_lr=[3e-4],
