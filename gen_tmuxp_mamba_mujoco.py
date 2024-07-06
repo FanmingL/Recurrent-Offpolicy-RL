@@ -57,21 +57,21 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         test_nrollout=1,
 
         value_embedding_layer_type=[f'fc', f'{rnn_type_name}', f'fc'],
-        value_embedding_activations=[f'{basic_activation}', f'linear', embedding_output_activation],
+        value_embedding_activations=[f'{basic_activation}', f'{basic_activation}', embedding_output_activation],
         value_embedding_hidden_size=[common_ndim, common_ndim],
 
-        value_hidden_size=[common_ndim, common_ndim, common_ndim],
-        value_activations=[basic_activation, basic_activation, basic_activation, 'linear'],
-        value_layer_type=[f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}'],
+        value_hidden_size=[common_ndim, common_ndim],
+        value_activations=[basic_activation, basic_activation, 'linear'],
+        value_layer_type=[f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}'],
 
         policy_embedding_layer_type=[ f'fc', f'{rnn_type_name}', 'fc'],
-        policy_embedding_activations=[f'{basic_activation}', 'linear',
+        policy_embedding_activations=[f'{basic_activation}', f'{basic_activation}',
                                       embedding_output_activation],
         policy_embedding_hidden_size=[common_ndim, common_ndim],
 
-        policy_hidden_size=[common_ndim, common_ndim, common_ndim],
-        policy_activations=[basic_activation, basic_activation, basic_activation, 'linear'],
-        policy_layer_type=[f'fc', 'fc', f'fc', f'fc'],
+        policy_hidden_size=[common_ndim, common_ndim],
+        policy_activations=[basic_activation, basic_activation, 'linear'],
+        policy_layer_type=[f'fc', 'fc', f'fc'],
         sac_tau=0.995,  # influence value loss divergence
         value_net_num=1,
         cuda_inference=True,
@@ -100,10 +100,10 @@ def get_cmd_array(total_machine=8, machine_idx=0):
 
     # 6. 单独设置
     aligned_candidates = dict(
-        policy_lr=[3e-4],
-        value_lr=[1e-3],
+        policy_lr=[6e-5],
+        value_lr=[2e-4],
         rnn_policy_lr=[2e-6],
-        information=['Mamba_0705'],
+        information=['Mamba_0706'],
     )
 
     def task_is_valid(_task):
