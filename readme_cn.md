@@ -45,6 +45,7 @@ pip install -e .
 python gen_tmuxp_gpt.py
 tmuxp load run_all.json
 ```
+每个启动脚本的实验结果在[此处](results.md)可以找到。
 
 ## 可视化结果
 我们使用[SmartLogger](https://github.com/FanmingL/SmartLogger)来进行日志管理，你可以在logfile中找到训练日志。

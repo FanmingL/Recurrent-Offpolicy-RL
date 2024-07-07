@@ -47,6 +47,8 @@ pip install -e .
 python gen_tmuxp_mamba_mujoco.py
 tmuxp load run_all.json
 ```
+We present the reproducing results of each script at [here](results.md).
+
 
 ## Visualizing Results
 We use [SmartLogger](https://github.com/FanmingL/SmartLogger) for log management. You can find the training logs in the directory named `logfile`. The most straightforward way to view the training process is to use TensorBoard:
