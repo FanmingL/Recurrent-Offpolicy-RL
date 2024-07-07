@@ -5,9 +5,9 @@ The following results were reproduced using `gen_tmuxp_mamba_mujoco.py`.
 ### Hopper-v2
 final return: 4400
 
-![](https://sky.luofm.site:13284/luofm/2024/07/07/668aaf49be50c.png)
+<img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf49be50c.png" style="zoom:20%;" />
 
 ### Walker2d-v2
 final return: 9495
 
-![](https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png)
+<img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png" style="zoom: 20%;" />
