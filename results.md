@@ -24,6 +24,9 @@ vanilla SAC: 5681
 <img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png" style="zoom: 20%;" />
 
 ## Mamba+PyBullet POMDP
+
+The following results were reproduced using `gen_tmuxp_mamba_pomdp.py`
+
 final return: 
 
 |               |   AntBLT-P-v0   |   AntBLT-V-v0   |HalfCheetahBLT-P-v0|HalfCheetahBLT-V-v0|HopperBLT-P-v0| HopperBLT-V-v0  |   WalkerBLT-P-v0   |WalkerBLT-V-v0|
