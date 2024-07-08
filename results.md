@@ -10,12 +10,16 @@ final return: 4400
 
 previous SOTA (TD7): 4075
 
+vanilla SAC: 3167
+
 <img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf49be50c.png" style="zoom:20%;" />
 
 ### Walker2d-v2
 final return: 9495
 
 previous SOTA (TD7): 7397
+
+vanilla SAC: 5681
 
 <img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png" style="zoom: 20%;" />
 
