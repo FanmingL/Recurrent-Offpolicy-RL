@@ -1,5 +1,8 @@
 # Results
 We report on the replication of the results from the paper using this code. All logs can be found at [this url](https://box.nju.edu.cn/d/fe0603fd2bd5479eb8ee/). Reproducing work is still in progress. We will continue to update this page.
+
+[toc]
+
 ## Mamba+MuJoCo
 The following results were reproduced using `gen_tmuxp_mamba_mujoco.py`.
 ### Hopper-v2
@@ -11,3 +14,6 @@ final return: 4400
 final return: 9495
 
 <img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png" style="zoom: 20%;" />
+
+## Mamba+PyBullet POMDP
+<img src="https://sky.luofm.site:13284/luofm/2024/07/08/668c03006f95b.png" style="zoom: 20%;" />

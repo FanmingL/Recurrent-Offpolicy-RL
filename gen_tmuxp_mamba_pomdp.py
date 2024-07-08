@@ -7,8 +7,8 @@ from smart_logger.scripts.generate_tmuxp_base import generate_tmuxp_file, make_c
 import argparse
 import subprocess
 from typing import Dict
-MAX_SUBWINDOW =2
-MAX_PARALLEL = 12
+MAX_SUBWINDOW = 2
+MAX_PARALLEL = 8
 
 def get_gpu_count():
     sp = subprocess.Popen(['nvidia-smi', '-L'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -99,7 +99,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         policy_lr=[3e-4],
         value_lr=[1e-3],
         rnn_policy_lr=[1e-5],
-        information=['Mamba_0706'],
+        information=['Mamba_0708'],
     )
 
     def task_is_valid(_task):
