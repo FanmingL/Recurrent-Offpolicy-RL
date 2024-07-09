@@ -99,7 +99,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         policy_lr=[6e-5],
         value_lr=[2e-4],
         rnn_policy_lr=[2e-6],
-        information=['Mamba_0706_gravity'],
+        information=['Mamba_0708_gravity'],
     )
 
     def task_is_valid(_task):
