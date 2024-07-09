@@ -1,11 +1,12 @@
 # Results
 We report on the replication of the results from the paper using this code. All logs can be found at [this url](https://box.nju.edu.cn/d/fe0603fd2bd5479eb8ee/). Reproducing work is still in progress. We will continue to update this page.
 
+**Note:** Due to some atomic operations in Mamba during backpropagation, Mamba’s backpropagation has randomness that cannot be eliminated with fixing random seeds. Therefore, experiments based on the `smamba` layer cannot be fully reproduced. For more details, see this link: [state-spaces/mamba#137 (comment)](https://github.com/state-spaces/mamba/issues/137#issuecomment-1918483734). On the contrary, the `mamba` layer is implemented with Triton and is reproducible.
+
 
 ## Mamba+MuJoCo
-The following results were reproduced using `gen_tmuxp_mamba_mujoco.py`.
+The following results were reproduced using [gen_tmuxp_mamba_mujoco.py](gen_tmuxp_mamba_mujoco.py).
 
-**Note:** Due to some atomic operations in Mamba during backpropagation, Mamba’s backpropagation has randomness that cannot be eliminated with fixing random seeds. Therefore, experiments based on the `smamba` layer cannot be fully reproduced. For more details, see this link: https://github.com/state-spaces/mamba/issues/137#issuecomment-1918483734. On the contrary, the `mamba` layer is implemented with Triton and is reproducible.
 ### Hopper-v2
 final return: 4400
 
@@ -26,7 +27,7 @@ vanilla [SAC](https://arxiv.org/abs/1801.01290): 5681
 
 ## Mamba+PyBullet POMDP
 
-The following results were reproduced using `gen_tmuxp_mamba_pomdp.py`
+The following results were reproduced using [gen_tmuxp_mamba_pomdp.py](gen_tmuxp_mamba_pomdp.py)
 
 final return: 
 
@@ -41,7 +42,7 @@ final return:
 ## Mamba+MuJoCo Gravity Randomization
 
 
-The following results were reproduced using `gen_tmuxp_mamba_dynamics_rnd.py`
+The following results were reproduced using [gen_tmuxp_mamba_dynamics_rnd.py](gen_tmuxp_mamba_dynamics_rnd.py)
 
 final return: 
 
