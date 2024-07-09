@@ -64,8 +64,7 @@ class GPTLayer(Module):
 
     def forward(self, hidden_states, attention_mask_in_length=None, inference_params=None):
         original_dtype = hidden_states.dtype
-        hidden_states = hidden_states.to(torch.bfloat16)
-        with torch.cuda.amp.autocast():
+        with torch.cuda.amp.autocast(dtype=torch.bfloat16):
             result = self.model.forward(hidden_states, attention_mask_in_length, inference_params)
         result = result.to(original_dtype)
         return result

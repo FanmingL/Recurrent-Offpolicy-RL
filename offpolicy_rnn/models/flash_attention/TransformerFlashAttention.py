@@ -67,7 +67,7 @@ class DecoderLayer(nn.Module):
         self.mha = MHA(embed_dim=d_model, num_heads=nhead,
                        dropout=dropout, causal=True, layer_idx=layer_idx,
                        use_alibi=True, use_flash_attn=True, return_residual=False,
-                       fused_bias_fc=True, dtype=torch.bfloat16)
+                       fused_bias_fc=True, dtype=torch.float32)
         self.ffn = PositionWiseFeedForward(d_model, d_ff, dropout)
         self.dropout = nn.Dropout(dropout)
         self.mha_norm = nn.LayerNorm(d_model) if ln else RMSNorm(d_model)
@@ -77,12 +77,9 @@ class DecoderLayer(nn.Module):
 
         x_residual = x
         x = self.mha_norm(x)
-        original_x_dtype = x.dtype
-
-        x = x.to(torch.bfloat16)
-        # with torch.cuda.amp.autocast():
-        x = self.mha.forward(x, inference_params=inference_params, **kwargs)
-        x = x.to(original_x_dtype)
+        with torch.cuda.amp.autocast(dtype=torch.bfloat16):
+            x = self.mha.forward(x, inference_params=inference_params, **kwargs)
+        x = x.to(torch.float32)
         x = self.dropout(x) + x_residual
         x = pre_norm(self.ffn, x, self.ffn_norm, self.dropout)
         return x

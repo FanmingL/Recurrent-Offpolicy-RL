@@ -2,7 +2,6 @@ import math
 from typing import Dict
 
 from .sac import SAC
-from ..buffers.replay_memory import Transition
 from ..buffers.transition_buffer.nested_replay_memory import NestedMemoryArray as NestedTransitionMemoryArray
 from ..utility.q_value_guard import QValueGuard
 import smart_logger
@@ -12,7 +11,7 @@ from ..policy_value_models.contextual_sac_policy import ContextualSACPolicy
 from ..policy_value_models.contextual_sac_discrete_policy import ContextualSACDiscretePolicy
 import copy
 from ..policy_value_models.make_models import make_policy_model
-
+from torch.cuda.amp import GradScaler
 
 class SACFullLengthRNNEnsembleQ(SAC):
     def __init__(self, parameter):
@@ -32,7 +31,13 @@ class SACFullLengthRNNEnsembleQ(SAC):
                 print(f'set desire_ndim')
                 network.in_proj.desire_ndim = 4
         self.logger(f'replay buffer skip len: {self._get_skip_len()}')
-
+        if self._get_whether_require_amp():
+            self.logger(f'enable AMP, introducing grad scalar!!')
+            self.amp_scalar = GradScaler()
+            self.amp_scalar_critic = GradScaler()
+        else:
+            self.amp_scalar = None
+            self.amp_scalar_critic = None
         self.replay_buffer = NestedTransitionMemoryArray(self.parameter.max_buffer_transition_num, self.env_info['max_trajectory_len'], additional_history_len=self._get_skip_len())
         # self.Q_guard = QValueGuard(guard_min=True, guard_max=True, decay_ratio=1.0)
         if self.discrete_env:
@@ -61,6 +66,14 @@ class SACFullLengthRNNEnsembleQ(SAC):
                 elif 'conv1d' in rnn_base.layer_type[i]:
                     skip_len = max(rnn_base.layer_list[i].d_conv, skip_len)
         return skip_len + 1
+
+    def _get_whether_require_amp(self):
+        for rnn_base in [self.values[0].uni_network, self.values[0].embedding_network,
+                         self.policy.uni_network, self.policy.embedding_network]:
+            for i in range(len(rnn_base.layer_type)):
+                if 'gpt' in rnn_base.layer_type[i]:
+                    return True
+        return False
 
     def _mask_mean(self, data: torch.Tensor, mask: torch.Tensor, valid_num: float) -> torch.Tensor:
         return (data * mask).sum() / valid_num
@@ -216,7 +229,10 @@ class SACFullLengthRNNEnsembleQ(SAC):
 
         # 2.5 optimize actor
         self.optimizer_policy.zero_grad()
-        actor_loss.backward()
+        if self.amp_scalar is not None:
+            self.amp_scalar.scale(actor_loss).backward()
+        else:
+            actor_loss.backward()
         pi_grad_norm = 0
         if self.parameter.policy_max_gradnorm is not None:
             pi_grad_norm = torch.nn.utils.clip_grad_norm_(self.policy.parameters(), self.parameter.policy_max_gradnorm,
@@ -233,7 +249,11 @@ class SACFullLengthRNNEnsembleQ(SAC):
 
             pi_grad_norm = 0
         # policy_grad_min, policy_grad_max, policy_grad_l2_norm_square = get_gradient_stats(self.policy.parameters())
-        self.optimizer_policy.step()
+        if self.amp_scalar is not None:
+            self.amp_scalar.step(self.optimizer_policy)
+            self.amp_scalar.update()
+        else:
+            self.optimizer_policy.step()
         return pi_grad_norm, actor_loss, log_prob, losses
 
     def _optim_value(self, state, last_state, last_action, action, mask, reward_input, value_hiddens, valid_num, target_Q):
@@ -244,7 +264,10 @@ class SACFullLengthRNNEnsembleQ(SAC):
 
         # 2.3 optimize the value model
         self.optimizer_value.zero_grad()
-        Q_loss.backward()
+        if self.amp_scalar_critic is not None:
+            self.amp_scalar_critic.scale(Q_loss).backward()
+        else:
+            Q_loss.backward()
         q_grad_norm = 0
         if self.parameter.value_max_gradnorm is not None:
             q_grad_norm = torch.nn.utils.clip_grad_norm_(self.value_parameters, self.parameter.value_max_gradnorm,
@@ -262,7 +285,11 @@ class SACFullLengthRNNEnsembleQ(SAC):
             q_grad_norm = 0.0
 
         # value_grad_min, value_grad_max, value_grad_l2_norm_square = get_gradient_stats(self.value_parameters)
-        self.optimizer_value.step()
+        if self.amp_scalar_critic is not None:
+            self.amp_scalar_critic.step(self.optimizer_value)
+            self.amp_scalar_critic.update()
+        else:
+            self.optimizer_value.step()
         return Q_loss, q_grad_norm, losses
 
     def train_one_batch(self) -> Dict:
@@ -310,7 +337,11 @@ class SACFullLengthRNNEnsembleQ(SAC):
             total_valid_indicators = traj_valid_indicators.clone()
             total_valid_indicators[torch.where(torch.diff(traj_valid_indicators, dim=-2) == 1)] = 1
             total_rnn_start[torch.where(torch.diff(total_rnn_start, dim=-2) == -1)] = 0
-            done[timeout > 0] = 0
+            # TODO: check to remove done when maximum timestep reaches, this is a very important setting
+            if self.parameter.env_name.startswith('Mem'):
+                pass
+            else:
+                done[timeout > 0] = 0
             # valid_num = mask.sum().item()
             alpha_detach = self.log_sac_alpha.exp().detach()
             # set RNN termination for LRU
@@ -424,6 +455,8 @@ class SACFullLengthRNNEnsembleQ(SAC):
             # 'policy_l2_norm_square': self.policy.l2_norm_square().item(),
             'q1_l2_norm_square': self.values[0].l2_norm_square().item(),
             'average_traj_len': self.replay_buffer.size / len(self.replay_buffer),
+            'amp_scalar_pi': self.amp_scalar.get_scale() if self.amp_scalar is not None else 0,
+            'amp_scalar_q': self.amp_scalar_critic.get_scale() if self.amp_scalar_critic is not None else 0,
             **policy_losses,
             **q_part_losses,
             **pi_part_losses,
