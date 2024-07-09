@@ -4,6 +4,8 @@ We report on the replication of the results from the paper using this code. All 
 
 ## Mamba+MuJoCo
 The following results were reproduced using `gen_tmuxp_mamba_mujoco.py`.
+
+**Note:** Due to some atomic operations in Mamba during backpropagation, Mamba’s backpropagation has randomness that cannot be eliminated with fixing random seeds. Therefore, experiments based on the `smamba` layer cannot be fully reproduced. For more details, see this link: https://github.com/state-spaces/mamba/issues/137#issuecomment-1918483734. On the contrary, the `mamba` layer is implemented with Triton and is reproducible.
 ### Hopper-v2
 final return: 4400
 
