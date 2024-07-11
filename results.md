@@ -25,6 +25,20 @@ vanilla [SAC](https://arxiv.org/abs/1801.01290): 5681
 
 <img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png" style="zoom: 20%;" />
 
+### Ant-v2
+
+final return: 8454
+
+SOTA ([TD7](https://arxiv.org/abs/2306.02451)): 10133
+
+vanilla [SAC](https://arxiv.org/abs/1801.01290): 4615
+
+
+
+<img src="https://sky.luofm.site:13284/luofm/2024/07/11/668f3ac1936fe.png" style="zoom: 20%;" />
+
+
+
 ## Mamba+PyBullet POMDP
 
 The following results were reproduced using [gen_tmuxp_mamba_pomdp.py](gen_tmuxp_mamba_pomdp.py)
