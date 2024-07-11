@@ -37,6 +37,18 @@ vanilla [SAC](https://arxiv.org/abs/1801.01290): 4615
 
 <img src="https://sky.luofm.site:13284/luofm/2024/07/11/668f3ac1936fe.png" style="zoom: 20%;" />
 
+### Humanoid-v2
+
+final return: 10708
+
+SOTA ([TD7](https://arxiv.org/abs/2306.02451)): 10281
+
+vanilla [SAC](https://arxiv.org/abs/1801.01290): 6555
+
+
+
+<img src="https://sky.luofm.site:13284/luofm/2024/07/11/668f7852a04e2.png" style="zoom: 20%;" />
+
 
 
 ## Mamba+PyBullet POMDP
