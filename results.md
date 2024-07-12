@@ -89,7 +89,7 @@ final return:
 
 |                                                              |   AntBLT-P-v0   |   AntBLT-V-v0   | HalfCheetahBLT-P-v0 | HalfCheetahBLT-V-v0 | HopperBLT-P-v0  | HopperBLT-V-v0  | WalkerBLT-P-v0  | WalkerBLT-V-v0  |
 | :----------------------------------------------------------- | :-------------: | :-------------: | :-----------------: | :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: |
-|CGPT-0711-2 | $\mathbf{2934} $ | $\mathbf{2310}$ | $\mathbf{3190}$ | $ \mathbf{3099}$ | $2297$ | $2431$ | $\mathbf{2000}$ | $1372$ |
+|CGPT-0711-2 | $\mathbf{2934} $ | $\mathbf{2310}$ | $\mathbf{3190}$ | $\mathbf{3099}$ | $2297$ | $2431$ | $\mathbf{2000}$ | $1372$ |
 | Previous SOTA ([GPIDE](https://openreview.net/forum?id=pKnhUWqZTJ) & [MF-RNN](https://arxiv.org/abs/2110.05038)) |     $2597$      |     $1137$      |       $2802$        |       $2073$        |     $\mathbf{2373}$     | $\mathbf{2537}$ |     $1502$      |     $\mathbf{1701}$     |
 
 
