@@ -14,7 +14,7 @@ MAX_SUBWINDOW =2
 # need to set up a total of 3x5=15 experiments. If you set `MAX_PARALLEL` to 4, it will start 4 task queues,
 # each executing a roughly equal number of tasks sequentially. In this case, the four queues will execute tasks
 # in the following quantities: [4, 4, 4, 3].
-MAX_PARALLEL = 4
+MAX_PARALLEL = 8
 
 def get_gpu_count():
     sp = subprocess.Popen(['nvidia-smi', '-L'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -54,21 +54,21 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     gpt_dim = 8 * 64
     parameters_base = dict(
         alg_name='sac_rnn_full_horizon_redQ_sep_optim',
-        total_iteration=5000,
+        total_iteration=1500,
         target_entropy_ratio=1.0,
         test_nprocess=1,
         test_nrollout=5,
 
         value_embedding_layer_type=[f'fc', f'{rnn_type_name}', f'fc'],
-        value_embedding_activations=[f'linear', f'elu', embedding_output_activation],
+        value_embedding_activations=[f'elu', f'elu', embedding_output_activation],
         value_embedding_hidden_size=[gpt_dim, gpt_dim],
 
         value_hidden_size=[common_ndim, common_ndim, common_ndim],
         value_activations=[basic_activation, basic_activation, basic_activation, 'linear'],
         value_layer_type=[f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}', f'efc-{num_ensemble}'],
 
-        policy_embedding_layer_type=[ f'fc', f'{rnn_type_name}', 'fc'],
-        policy_embedding_activations=[f'linear', 'elu',
+        policy_embedding_layer_type=[f'fc', f'{rnn_type_name}', 'fc'],
+        policy_embedding_activations=[f'elu', 'elu',
                                       embedding_output_activation],
         policy_embedding_hidden_size=[gpt_dim, gpt_dim],
 
@@ -87,6 +87,7 @@ def get_cmd_array(total_machine=8, machine_idx=0):
         value_uni_model_input_mapping_dim=128,
         reward_input=True,  # todo reward input here
         sac_batch_size=799,
+        policy_update_per=2,
         state_action_encoder=True,
         last_state_input=True,
     )
@@ -94,7 +95,10 @@ def get_cmd_array(total_machine=8, machine_idx=0):
     exclusive_candidates = dict(
         seed=[1],
         env_name=[
-            'AntBLT-V-v0', 'HalfCheetahBLT-V-v0', 'HopperBLT-V-v0', 'WalkerBLT-V-v0', 'HalfCheetah-v2', 'Humanoid-v2'
+            # 'AntBLT-V-v0', 'HalfCheetahBLT-V-v0', 'HopperBLT-V-v0', 'WalkerBLT-V-v0',
+            'AntBLT-P-v0', 'HalfCheetahBLT-P-v0', 'HopperBLT-P-v0',# 'WalkerBLT-P-v0',
+            # 'WalkerBLT-P-v0',
+            # 'HalfCheetah-v2', 'Humanoid-v2'
         ],
 
     )
@@ -102,10 +106,10 @@ def get_cmd_array(total_machine=8, machine_idx=0):
 
     # 6. 单独设置
     aligned_candidates = dict(
-        policy_lr=[3e-4],
+        policy_lr=[1e-4],
         value_lr=[3e-4],
         rnn_policy_lr=[1e-6],
-        information=['CGPT_0705'],
+        information=['CGPT_0711_2'],
     )
 
     def task_is_valid(_task):

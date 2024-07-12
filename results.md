@@ -77,6 +77,23 @@ final return:
 | Mamba-0708-gravity                                                                                                         |  $\mathbf{6185}$  | $\mathbf{7980}$ |  $\mathbf{3304}$   |   $\mathbf{7495}$    |   $\mathbf{5331}$    | 
 | Previous SOTA ([ESCP](https://ojs.aaai.org/index.php/AAAI/article/view/20730) & [PEARL](https://arxiv.org/abs/1903.08254)) |      $4065$       | $7022$ |       $2683$       |        $3857$        |        $3242$        | 
 
-
 <img src="https://sky.luofm.site:13284/luofm/2024/07/09/668cd7bc68acd.png" style="zoom: 45%;" />
 
+## GPT+PyBullet POMDP
+
+The following results were reproduced using [gen_tmuxp_gpt_pomdp.py](gen_tmuxp_gpt_pomdp.py)
+
+
+
+final return: 
+
+|                                                              |   AntBLT-P-v0   |   AntBLT-V-v0   | HalfCheetahBLT-P-v0 | HalfCheetahBLT-V-v0 | HopperBLT-P-v0  | HopperBLT-V-v0  | WalkerBLT-P-v0  | WalkerBLT-V-v0  |
+| :----------------------------------------------------------- | :-------------: | :-------------: | :-----------------: | :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+|CGPT-0711-2 | $\mathbf{2934} $ | $\mathbf{2310}$ | $\mathbf{3190}$ | $ \mathbf{3099}$ | $2297$ | $2431$ | $\mathbf{2000}$ | $1372$ |
+| Previous SOTA ([GPIDE](https://openreview.net/forum?id=pKnhUWqZTJ) & [MF-RNN](https://arxiv.org/abs/2110.05038)) |     $2597$      |     $1137$      |       $2802$        |       $2073$        |     $\mathbf{2373}$     | $\mathbf{2537}$ |     $1502$      |     $\mathbf{1701}$     |
+
+
+
+
+
+<img src="https://sky.luofm.site:13284/luofm/2024/07/12/6690847b0b647.png" style="zoom: 45%;" />
