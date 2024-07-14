@@ -79,6 +79,19 @@ final return:
 
 <img src="https://sky.luofm.site:13284/luofm/2024/07/09/668cd7bc68acd.png" style="zoom: 45%;" />
 
+## Mamba+Meta RL
+
+The following results were reproduced using [gen_tmuxp_mamba_meta.py](gen_tmuxp_mamba_meta.py)
+
+
+|                                         |    AntDir-v0    |            CheetahDir-v0             |          HalfCheetahVel-v0          |              Wind-v0               |
+|:----------------------------------------|:---------------:|:------------------------------------:|:-----------------------------------:|:----------------------------------:|
+| Mamba-0711-meta                         | $\mathbf{2532}$ | $\mathbf{5014}$ | $\mathbf{-33}$ | $\mathbf{65}$ | 
+| Previous SOTA                           | $2318$ | $4270$ | $−62$ | $\mathbf{61}$ | 
+
+<img src="https://sky.luofm.site:13284/luofm/2024/07/14/669349e949237.png" style="zoom: 45%;" />
+
+
 ## GPT+PyBullet POMDP
 
 The following results were reproduced using [gen_tmuxp_gpt_pomdp.py](gen_tmuxp_gpt_pomdp.py)
