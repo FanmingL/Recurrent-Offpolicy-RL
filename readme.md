@@ -1,6 +1,9 @@
 # Off-Policy RL with RNN and Transformers
 
 This repository is the official implementation of the paper "[Efficient Recurrent Off-Policy RL Requires a Context-Encoder-Specific Learning Rate.](https://arxiv.org/abs/2405.15384)" It includes implementations of SAC and TD3 based on RNN and Transformer architectures.
+
+🌟We have placed some reproduced experimental results and logs in the [result page](results.md).
+
 ## Features
 The algorithms implemented in this repository have the following features:
 1. We train the recurrent policy and values using full-length trajectories instead of sequence fragments;
