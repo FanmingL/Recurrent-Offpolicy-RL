@@ -7,47 +7,17 @@ We report on the replication of the results from the paper using this code. All 
 ## Mamba+MuJoCo
 The following results were reproduced using [gen_tmuxp_mamba_mujoco.py](gen_tmuxp_mamba_mujoco.py).
 
-### Hopper-v2
-final return: 4400
+final return:
 
-previous SOTA ([TD7](https://arxiv.org/abs/2306.02451)): 4075
-
-vanilla [SAC](https://arxiv.org/abs/1801.01290): 3167
-
-<img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf49be50c.png" style="zoom:20%;" />
-
-### Walker2d-v2
-final return: 9495
-
-previous SOTA ([TD7](https://arxiv.org/abs/2306.02451)): 7397
-
-vanilla [SAC](https://arxiv.org/abs/1801.01290): 5681
-
-<img src="https://sky.luofm.site:13284/luofm/2024/07/07/668aaf6bdb48b.png" style="zoom: 20%;" />
-
-### Ant-v2
-
-final return: 8454
-
-SOTA ([TD7](https://arxiv.org/abs/2306.02451)): 10133
-
-vanilla [SAC](https://arxiv.org/abs/1801.01290): 4615
+|                                                         |      Ant-v2      |    Hopper-v2    |   Humanoid-v2    |   Walker2d-v2   |
+| :------------------------------------------------------ | :--------------: | :-------------: | :--------------: | :-------------: |
+| Mamba (ours)                                            |      $8454$      | $\mathbf{4400}$ | $\mathbf{10708}$ | $\mathbf{9495}$ |
+| Previous SOTA ([TD7](https://arxiv.org/abs/2306.02451)) | $\mathbf{10133}$ |     $4075$      |     $10281$      |     $7397$      |
+| vanilla [SAC](https://arxiv.org/abs/1801.01290)         |      $4615$      |     $3167$      |      $6555$      |     $5681$      |
 
 
 
-<img src="https://sky.luofm.site:13284/luofm/2024/07/11/668f3ac1936fe.png" style="zoom: 20%;" />
-
-### Humanoid-v2
-
-final return: 10708
-
-previous SOTA ([TD7](https://arxiv.org/abs/2306.02451)): 10281
-
-vanilla [SAC](https://arxiv.org/abs/1801.01290): 6555
-
-
-
-<img src="https://sky.luofm.site:13284/luofm/2024/07/11/668f7852a04e2.png" style="zoom: 20%;" />
+<img src="https://sky.luofm.site:13284/luofm/2024/07/17/6697c824ee186.png" style="zoom:45%;" />
 
 
 
