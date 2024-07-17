@@ -9,11 +9,11 @@ The following results were reproduced using [gen_tmuxp_mamba_mujoco.py](gen_tmux
 
 final return:
 
-|                                                         |      Ant-v2      |    Hopper-v2    |   Humanoid-v2    |   Walker2d-v2   |
-| :------------------------------------------------------ | :--------------: | :-------------: | :--------------: | :-------------: |
-| Mamba (ours)                                            |      $8454$      | $\mathbf{4400}$ | $\mathbf{10708}$ | $\mathbf{9495}$ |
-| Previous SOTA ([TD7](https://arxiv.org/abs/2306.02451)) | $\mathbf{10133}$ |     $4075$      |     $10281$      |     $7397$      |
-| vanilla [SAC](https://arxiv.org/abs/1801.01290)         |      $4615$      |     $3167$      |      $6555$      |     $5681$      |
+|                                                         |      Ant-v2      |    Hopper-v2    |   Humanoid-v2    |   Walker2d-v2   | Average         |
+| :------------------------------------------------------ | :--------------: | :-------------: | :--------------: | :-------------: | --------------- |
+| Mamba (ours)                                            |      $8454$      | $\mathbf{4400}$ | $\mathbf{10708}$ | $\mathbf{9495}$ | $\mathbf{8264}$ |
+| Previous SOTA ([TD7](https://arxiv.org/abs/2306.02451)) | $\mathbf{10133}$ |     $4075$      |     $10281$      |     $7397$      | $7971$          |
+| vanilla [SAC](https://arxiv.org/abs/1801.01290)         |      $4615$      |     $3167$      |      $6555$      |     $5681$      | $5004$          |
 
 
 
