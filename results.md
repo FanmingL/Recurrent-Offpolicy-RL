@@ -65,7 +65,7 @@ The following results were reproduced using [gen_tmuxp_mamba_meta.py](gen_tmuxp_
 
 The following results were reproduced using [gen_tmuxp_mamba_meta.py](gen_tmuxp_mamba_dmcontrol.py)
 
-<img src="https://sky.luofm.site:13284/luofm/2024/07/17/6697c451209a8.png" style="zoom:45%;" />
+<img src="https://sky.luofm.site:13284/luofm/2024/07/18/66986fc16709f.png" style="zoom:45%;" />
 
 ## GPT+PyBullet POMDP
 
