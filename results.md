@@ -63,7 +63,7 @@ The following results were reproduced using [gen_tmuxp_mamba_meta.py](gen_tmuxp_
 
 ## Mamba+DeepMind Control
 
-The following results were reproduced using [gen_tmuxp_mamba_meta.py](gen_tmuxp_mamba_dmcontrol.py)
+The following results were reproduced using [gen_tmuxp_mamba_dmcontrol.py](gen_tmuxp_mamba_dmcontrol.py)
 
 <img src="https://sky.luofm.site:13284/luofm/2024/07/18/66986fc16709f.png" style="zoom:45%;" />
 
