@@ -8,7 +8,7 @@ This repository is the official implementation of the paper "[Efficient Recurren
 The algorithms implemented in this repository have the following features:
 1. We train the recurrent policy and values using full-length trajectories instead of sequence fragments;
 2. To enhance training stability with full-length trajectories, we utilize the [Context-Encoder-Specific Learning Rate](https://arxiv.org/abs/2405.15384) (RESeL) technique;
-3. [TODO] We provide a set of training hyperparameters that can achieve state-of-the-art performance in different environments of POMDP and MDP.
+3. We provide a set of training hyperparameters that can achieve state-of-the-art performance in different environments of POMDP and MDP.
 
 ## Supported Layer Types
 This repository supports the following neural network architectures. We have tested with training on `gru`, `mamba`, `smamba`, and `cgpt` layer types. The training speed from fastest to slowest is: `smamba`, `mamba`, `cgpt`, `gru`.
