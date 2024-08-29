@@ -83,15 +83,5 @@ final return:
 
 
 
+
 <img src="https://sky.luofm.site:13284/luofm/2024/07/12/6690847b0b647.png" style="zoom: 45%;" />
-
-## GPT+MuJoCo
-The following results were reproduced using [gen_tmuxp_gpt_mujoco.py](gen_tmuxp_gpt_mujoco.py)
-
-||                   Ant-v2                   |               HalfCheetah-v2                |                 Hopper-v2                  |Humanoid-v2|                Walker2d-v2                 |
-|:------|:------------------------------------------:|:-------------------------------------------:|:------------------------------------------:|:------:|:------------------------------------------:|
-|GPT | $\mathbf{6361.30}$ | $\mathbf{16837.48}$ | $\mathbf{4293.53}$ | $\mathbf{9393.20}$ | $\mathbf{8053.96}$ | 
-
-
-
-<img src="https://sky.luofm.site:13284/luofm/2024/08/29/66cfd18288f24.png" style="zoom: 45%;" />
