@@ -1,6 +1,6 @@
 # Off-Policy RL with RNN and Transformers
 
-This repository is the official implementation of the paper "[Efficient Recurrent Off-Policy RL Requires a Context-Encoder-Specific Learning Rate.](https://arxiv.org/abs/2405.15384)" It includes implementations of SAC and TD3 based on RNN and Transformer architectures.
+This repository is the official implementation of the NeurIPS 2024 paper "[Efficient Recurrent Off-Policy RL Requires a Context-Encoder-Specific Learning Rate.](https://arxiv.org/abs/2405.15384)" It includes implementations of SAC and TD3 based on RNN and Transformer architectures.
 
 🌟We presented some reproduced results and logs in the [result page](results.md).
 
@@ -79,11 +79,12 @@ We present the reproducing results at [here](results.md).
   
 ## Citation
 ```
-@article{luo2024efficient,
-  title={Efficient Recurrent Off-Policy RL Requires a Context-Encoder-Specific Learning Rate},
-  author={Luo, Fan-Ming and Tu, Zuolin and Huang, Zefang and Yu, Yang},
-  journal={arXiv preprint arXiv:2405.15384},
-  year={2024}
+@inproceedings{luo2024efficient,
+  author    = {Luo, Fan-Ming and Tu, Zuolin and Huang, Zefang and Yu, Yang},
+  title     = {Efficient Recurrent Off-Policy RL Requires a Context-Encoder-Specific Learning Rate},
+  booktitle = {Advances in Neural Information Processing Systems 38},
+  address = {Vancouver, Canada},
+  year      = {2024}
 }
 ```
 
